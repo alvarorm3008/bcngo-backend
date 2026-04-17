@@ -1,5 +1,7 @@
 # BCN GO
 
+Parte del monorepo BCNGo: este código está en la carpeta **`frontend/`**. El archivo `app/google-services.json` no se sube al repositorio; en **GitHub Actions** configura el secreto **`GOOGLE_SERVICES_JSON`** con el JSON completo para que el CI pueda compilar.
+
 Aplicación Android para descubrir Barcelona: puntos de interés, itinerarios (manuales y automáticos), eventos, movilidad (paradas cercanas: metro, bus, Bicing) y comunidad mediante chats y reseñas. Incluye autenticación con correo y Google, notificaciones push y panel de administración.
 
 ---
