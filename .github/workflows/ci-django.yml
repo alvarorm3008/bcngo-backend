@@ -5,32 +5,36 @@ on:
     branches:
       - develop
       - main
+    paths:
+      - "backend/**"
+      - ".github/workflows/ci-django.yml"
   pull_request:
     branches:
       - develop
       - main
+    paths:
+      - "backend/**"
+      - ".github/workflows/ci-django.yml"
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
 
     steps:
-      # 1. Checkout the repository
       - name: Check out code
         uses: actions/checkout@v3
 
-      # 2. Show Docker version
       - name: Verify Docker and Docker Compose installation
         run: |
           docker --version
           docker compose version
 
-      # 3. Build and start containers
       - name: Build and start services
-        run: |
-          docker compose up --build -d
+        run: docker compose up --build -d
 
-      # 4. Wait for database to be ready
       - name: Wait for PostgreSQL
         run: |
           until docker exec postgres-container pg_isready -U dbmasteruser -d postgres; do
@@ -38,49 +42,39 @@ jobs:
             sleep 3
           done
 
-      # 5. Run Pylint
       - name: Run Pylint
-        run: |
-          docker exec bcngo-container pylint /app --exit-zero
+        run: docker exec bcngo-container pylint /app --exit-zero
 
-      # 6. Run migrations
       - name: Run Django migrations
-        run: |
-          docker exec bcngo-container python manage.py migrate
+        run: docker exec bcngo-container python manage.py migrate
 
-      # 7. Run tests
       - name: Run Django tests
-        run: |
-          docker exec bcngo-container python manage.py test --noinput
+        run: docker exec bcngo-container python manage.py test --noinput
 
-      # 8. Stop and clean up Docker containers
       - name: Stop and clean up
         if: always()
-        run: |
-          docker compose down
+        run: docker compose down
 
   deploy:
-    needs: test # Ejecutar solo si el trabajo de pruebas pasa
+    needs: test
     runs-on: ubuntu-latest
+    if: github.event_name == 'push'
 
     steps:
-      # 1. Check out the repository
       - name: Check out code
         uses: actions/checkout@v3
 
-      # 2. Set up SSH to access Lightsail instance
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.LIGHTSAIL_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
-      # 3. Deploy updated application code to Lightsail instance
       - name: Deploy application
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@35.180.108.104 << EOF
-          cd /home/ubuntu/PES/bcngo-backend
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@35.180.108.104 << 'EOF'
+          cd /home/ubuntu/PES/bcngo-backend/backend
           git pull origin develop
-          docker-compose down
-          docker-compose up --build -d
+          docker compose down
+          docker compose up --build -d
           EOF

@@ -1,0 +1,108 @@
+name: Android CI
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+    paths:
+      - "frontend/**"
+      - ".github/workflows/ci-android.yml"
+  pull_request:
+    branches:
+      - develop
+      - main
+    paths:
+      - "frontend/**"
+      - ".github/workflows/ci-android.yml"
+
+jobs:
+  build:
+    name: Verificar compilación y calidad
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Prepare google-services.json
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          if [ -f app/google-services.json ]; then
+            echo "Using existing app/google-services.json"
+          elif [ -n "$GOOGLE_SERVICES_JSON" ]; then
+            echo "$GOOGLE_SERVICES_JSON" > app/google-services.json
+          else
+            echo "Falta app/google-services.json o el secreto GOOGLE_SERVICES_JSON en GitHub."
+            exit 1
+          fi
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: "23"
+
+      - name: Cache Gradle Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('frontend/**/*.gradle.kts', 'frontend/**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+          api-level: 33
+          build-tools: 33.0.2
+          cmake-version: 3.22.1
+
+      - name: Create local.properties
+        run: |
+          echo "sdk.dir=${ANDROID_SDK_ROOT}" > ./local.properties
+
+      - name: Make Gradle Wrapper Executable
+        run: chmod +x ./gradlew
+
+      - name: Verify Compilation
+        run: ./gradlew assembleDebug
+
+      - name: Run Ktlint
+        run: ./gradlew ktlintCheck
+        continue-on-error: true
+
+      - name: Run Detekt
+        run: ./gradlew detekt
+        continue-on-error: true
+
+      - name: Run Unit Tests
+        run: ./gradlew testDebugUnitTest --info
+
+      - name: Run UI Tests (AndroidTest)
+        run: ./gradlew connectedDebugAndroidTest --info
+        continue-on-error: true
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
+
+      - name: Obtain Firebase Auth Token
+        id: auth_token
+        run: |
+          FIREBASE_AUTH_TOKEN=$(gcloud auth application-default print-access-token)
+          echo "FIREBASE_AUTH_TOKEN=$FIREBASE_AUTH_TOKEN" >> $GITHUB_ENV
+
+      - name: Deploy to Firebase Distribution
+        if: github.event_name == 'pull_request' && github.base_ref == 'main'
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          token: ${{ env.FIREBASE_AUTH_TOKEN }}
+          groups: "testers"
+          file: frontend/app/build/outputs/apk/debug/app-debug.apk

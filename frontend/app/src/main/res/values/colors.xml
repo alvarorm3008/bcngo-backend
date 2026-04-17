@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><!-- res/values/colors.xml -->
+<resources>
+    <color name="principal_red">#910811</color>
+    <color name="dark_gray">#333333</color>
+    <color name="light_gray">#CCCCCC</color>
+    <color name="background_gray">#FFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

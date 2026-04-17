@@ -1,193 +1,75 @@
-# BCNGo — Backend API
+# BCNGo
 
-API REST del proyecto **BCNGo**: aplicación orientada a cultura y ocio en Barcelona (eventos, puntos de interés, itinerarios, pasaporte cultural y usuarios).
+Monorepo del proyecto **BCNGo**: cultura y ocio en Barcelona. Incluye la **API REST (Django)** y la **app Android (Kotlin)** en un solo repositorio.
 
-Stack principal: **Django 4.2**, **Django REST Framework**, **PostgreSQL**, autenticación **JWT**, notificaciones con **Firebase** y documentación **OpenAPI (Swagger / ReDoc)**.
+| Parte | Ruta | Descripción |
+|--------|------|-------------|
+| **Backend** | [`backend/`](backend/) | Django, DRF, PostgreSQL, JWT, Firebase Admin, Swagger |
+| **Frontend** | [`frontend/`](frontend/) | App Android con Gradle |
 
----
+## Requisitos rápidos
 
-## Contenido
+- **Backend:** Python 3.9+, Docker (opcional), PostgreSQL.
+- **Frontend:** Android Studio / JDK (ver [`frontend/README.md`](frontend/README.md)).
 
-- [Requisitos](#requisitos)
-- [Puesta en marcha con Docker](#puesta-en-marcha-con-docker)
-- [Puesta en marcha en local (sin Docker)](#puesta-en-marcha-en-local-sin-docker)
-- [Variables de entorno](#variables-de-entorno)
-- [Documentación de la API](#documentación-de-la-api)
-- [Estructura del proyecto](#estructura-del-proyecto)
-- [Comandos de gestión útiles](#comandos-de-gestión-útiles)
-- [Tests y calidad](#tests-y-calidad)
-- [CI/CD](#cicd)
+## Puesta en marcha
 
----
-
-## Requisitos
-
-| Entorno | Versión recomendada |
-|--------|---------------------|
-| Python | 3.9+ (alineado con el `Dockerfile`) |
-| PostgreSQL | Compatible con `psycopg2-binary` del `requirements.txt` |
-| Docker / Docker Compose | Para el flujo containerizado descrito abajo |
-
----
-
-## Puesta en marcha con Docker
-
-1. Clona el repositorio y entra en la carpeta del proyecto.
-
-2. Asegúrate de tener el fichero de credenciales de Firebase en la ruta esperada (por defecto `./config/firebase-key.json`, o la que indiques con `FIREBASE_KEY_PATH`).
-
-3. Levanta los servicios:
-
-   ```bash
-   docker compose up --build
-   ```
-
-   La aplicación queda expuesta en **http://localhost:8000** (puerto mapeado en `docker-compose.yml`).
-
-4. En otra terminal, aplica migraciones (primera vez o tras cambios en modelos):
-
-   ```bash
-   docker exec bcngo-container python manage.py migrate
-   ```
-
-5. Para detener:
-
-   ```bash
-   docker compose down
-   ```
-
-> **Nota:** En la imagen se configura **cron** para ejecutar diariamente la sincronización de eventos (`sync_events`). Revisa `config/mycron` si necesitas otro horario o comandos.
-
----
-
-## Puesta en marcha en local (sin Docker)
-
-1. Crea y activa un entorno virtual:
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate   # Linux / macOS
-   # .\venv\Scripts\activate  # Windows
-   ```
-
-2. Instala dependencias:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Configura PostgreSQL y ajusta `DATABASES` en `bcngo_backend/settings.py` (o migra la configuración a variables de entorno en tu despliegue). El usuario, contraseña y base deben coincidir con tu instancia local.
-
-4. Exporta las variables necesarias (ver siguiente sección), incluido el path al JSON de Firebase.
-
-5. Aplica migraciones y arranca el servidor de desarrollo:
-
-   ```bash
-   python manage.py migrate
-   python manage.py runserver
-   ```
-
----
-
-## Variables de entorno
-
-| Variable | Descripción |
-|----------|-------------|
-| `FIREBASE_KEY_PATH` | Ruta al JSON de credenciales de Firebase Admin. Por defecto: `./config/firebase-key.json`. |
-| `EMAIL_HOST_USER` | Usuario SMTP (p. ej. recuperación de contraseña). |
-| `EMAIL_HOST_PASSWORD` | Contraseña o app password del buzón. |
-
-Estas claves se leen con `python-decouple` donde aplica; puedes usar un fichero `.env` en la raíz del proyecto (no lo subas al repositorio si contiene secretos).
-
-**Buenas prácticas:** no versiones claves reales de base de datos, `SECRET_KEY` ni el JSON de Firebase. Añade `firebase-key.json` y `.env` a `.gitignore` en entornos reales si aún no están ignorados.
-
----
-
-## Documentación de la API
-
-Con el servidor en marcha:
-
-| Recurso | URL |
-|--------|-----|
-| **Swagger UI** | http://localhost:8000/swagger/ |
-| **ReDoc** | http://localhost:8000/redoc/ |
-| **Admin Django** | http://localhost:8000/admin/ |
-
-Prefijos principales de la API (ver `bcngo_backend/urls.py`):
-
-| Prefijo | Módulo |
-|---------|--------|
-| `/puntosdeinteres/` | Puntos de interés y reseñas |
-| `/itinerario/` | Itinerarios |
-| `/users/` | Usuarios y autenticación |
-| `/pasaporte/` | Pasaporte cultural |
-| `/eventos/` | Eventos y funcionalidades asociadas |
-| `/` (vía `servicio`) | Integración con el servicio YAML externo |
-
----
-
-## Estructura del proyecto
-
-| Ruta | Rol |
-|------|-----|
-| `bcngo_backend/` | Settings, URLs raíz, plantillas (p. ej. reset de contraseña) |
-| `config/` | Cron y recursos de configuración (p. ej. Firebase) |
-| `users/` | Modelo de usuario personalizado, JWT, vistas de auth |
-| `puntosdeinteres/` | POIs, sincronización con APIs externas |
-| `itinerario/` | Itinerarios |
-| `pasaporte/` | Pasaporte cultural |
-| `eventos/` | Eventos, chats de grupo, favoritos, sincronización |
-| `servicio/` | Endpoints del servicio recibido / contrato YAML |
-
----
-
-## Comandos de gestión útiles
+### API (desde la raíz del repo)
 
 ```bash
-# Sincronizar eventos desde la fuente externa
-python manage.py sync_events
-
-# Sincronizar puntos de interés
-python manage.py sync_points_of_interest
-
-# Mantenimiento de puntos (ver ayuda del comando)
-python manage.py delete_puntos
+cd backend
+docker compose up --build
 ```
 
----
-
-## Tests y calidad
+Migraciones (primera vez):
 
 ```bash
-# Tests Django
-python manage.py test --noinput
-
-# Pytest (requiere `pytest-django`; `DJANGO_SETTINGS_MODULE` en pytest.ini)
-pytest
+docker exec bcngo-container python manage.py migrate
 ```
 
-Análisis estático con Pylint (el CI lo ejecuta dentro del contenedor):
+Swagger: http://localhost:8000/swagger/
+
+Más detalle: [**backend/README.md**](backend/README.md).
+
+### App Android
 
 ```bash
-pylint . --exit-zero
+cd frontend
+./gradlew assembleDebug
 ```
 
----
+El archivo `frontend/app/google-services.json` no se versiona (contiene claves). Cópialo en local según [**frontend/README.md**](frontend/README.md). En GitHub Actions, define el secreto **`GOOGLE_SERVICES_JSON`** con el contenido completo del JSON para que el CI pueda compilar.
 
 ## CI/CD
 
-En `.github/workflows/ci-django.yml`:
+Los workflows viven en [`.github/workflows/`](.github/workflows/):
 
-1. Se construye y levanta el proyecto con **Docker Compose**.
-2. Se espera a PostgreSQL, se ejecuta **Pylint**, **migraciones** y **`manage.py test`**.
-3. Tras un push a `main` / `develop`, un job de **deploy** puede actualizar la instancia remota vía SSH (requiere secretos configurados en el repositorio, p. ej. `LIGHTSAIL_SSH_KEY`).
+- **`ci-django.yml`** — Docker Compose, Pylint, migraciones y tests del backend (solo si cambian archivos bajo `backend/` o el propio workflow).
+- **`ci-android.yml`** — Compilación, ktlint, detekt, tests y despliegue a Firebase Distribution cuando aplica (solo si cambian archivos bajo `frontend/` o el propio workflow).
 
-Ajusta ramas y secretos según tu organización.
+## Despliegue del backend en servidor
+
+Si despliegas con el job SSH del workflow Django, en la máquina remota el código debe quedar con esta estructura (por ejemplo tras `git pull`):
+
+```text
+.../bcngo-backend/    # o el nombre de tu carpeta
+  backend/
+    docker-compose.yml
+    ...
+```
+
+Los comandos remotos usan el subdirectorio **`backend/`** para `docker compose`. Si tu servidor tenía el proyecto en la raíz del repo antiguo, mueve o reclona para alinear rutas.
+
+## Estructura del repositorio
+
+```text
+.
+├── README.md                 # Este archivo
+├── backend/                  # Proyecto Django (API)
+├── frontend/                 # Proyecto Android
+└── .github/workflows/        # CI backend y frontend
+```
 
 ---
 
-## Licencia y contacto
-
-Documentación OpenAPI generada con **drf-yasg**. Contacto indicado en el esquema de la API: `pesbcngo@gmail.com`.
-
-Si mejoras el despliegue, documenta en este README los cambios en URLs públicas o requisitos nuevos para que el equipo las tenga centralizadas.
+Contacto API (documentación OpenAPI): `pesbcngo@gmail.com`.

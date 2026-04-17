@@ -1,23 +1,37 @@
-# Secretos y entorno local (nunca subir a GitHub)
+# Secretos y entorno local (nunca subir credenciales reales)
 .env
 .env.local
-config/firebase-key.json
+backend/config/firebase-key.json
+**/firebase-key.json
 *.pem
 
+# Backend — Python / Django
 __pycache__/
 *.pyc
 *.pyo
-
 venv/
 env/
 .venv/
-
-*.vscode/
-
 *.sqlite3
-
 *.log
-
 .coverage
 htmlcov/
 
+# Frontend — Android / Gradle (ver también frontend/.gitignore)
+frontend/.gradle/
+frontend/**/build/
+frontend/local.properties
+frontend/.idea/
+frontend/*.iml
+frontend/captures/
+frontend/.externalNativeBuild
+frontend/.cxx
+frontend/.kotlin/
+frontend/app/google-services.json
+frontend/app/debug.keystore
+*.jks
+
+# Editor
+*.vscode/
+
+.DS_Store

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="4.3">
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/components/Cabezera.kt">
+	<error line="59" column="5" severity="warning" message="The function Cabezera is too long (98). The maximum length is 60." source="detekt.LongMethod" />
+	<error line="238" column="2" severity="warning" message="The file C:\Users\carla\git\bcngo-frontend\app\src\main\java\com\example\bcngo\components\Cabezera.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+	<error line="178" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="179" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="180" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="181" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="182" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="183" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="166" column="47" severity="warning" message="Function parameter `onDismiss` is unused." source="detekt.UnusedParameter" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/navigation/Navigation.kt">
+	<error line="28" column="5" severity="warning" message="The function Navigation is too long (99). The maximum length is 60." source="detekt.LongMethod" />
+	<error line="10" column="1" severity="warning" message="com.example.bcngo.screens.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/network/ApiService.kt">
+	<error line="99" column="17" severity="warning" message="Function sendUserCredentials is nested too deeply." source="detekt.NestedBlockDepth" />
+	<error line="57" column="18" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="73" column="18" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="149" column="18" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="197" column="18" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="241" column="18" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="276" column="18" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="319" column="18" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="145" column="17" severity="warning" message="Exception is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case." source="detekt.TooGenericExceptionThrown" />
+	<error line="194" column="21" severity="warning" message="Exception is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case." source="detekt.TooGenericExceptionThrown" />
+	<error line="239" column="17" severity="warning" message="Exception is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case." source="detekt.TooGenericExceptionThrown" />
+	<error line="274" column="17" severity="warning" message="Exception is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case." source="detekt.TooGenericExceptionThrown" />
+	<error line="317" column="17" severity="warning" message="Exception is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case." source="detekt.TooGenericExceptionThrown" />
+	<error line="151" column="13" severity="warning" message="Do not rethrow a caught exception of the same type." source="detekt.RethrowCaughtException" />
+	<error line="208" column="9" severity="warning" message="Function parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.FunctionParameterNaming" />
+	<error line="209" column="9" severity="warning" message="Function parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.FunctionParameterNaming" />
+	<error line="99" column="17" severity="warning" message="Too many throw statements in the function sendUserCredentials. The maximum number of allowed throw statements is 2." source="detekt.ThrowsCount" />
+	<error line="157" column="17" severity="warning" message="Too many throw statements in the function sendUserCredentialsLogIn. The maximum number of allowed throw statements is 2." source="detekt.ThrowsCount" />
+	<error line="5" column="1" severity="warning" message="com.example.bcngo.exceptions.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="11" column="1" severity="warning" message="io.ktor.client.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="14" column="1" severity="warning" message="io.ktor.client.plugins.contentnegotiation.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="15" column="1" severity="warning" message="io.ktor.client.plugins.logging.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="16" column="1" severity="warning" message="io.ktor.client.request.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="17" column="1" severity="warning" message="io.ktor.client.statement.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="18" column="1" severity="warning" message="io.ktor.http.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="19" column="1" severity="warning" message="io.ktor.serialization.kotlinx.json.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/admin/CreateInterestPoint.kt">
+	<error line="27" column="5" severity="warning" message="The function CreateInterestPoint is too long (134). The maximum length is 60." source="detekt.LongMethod" />
+	<error line="260" column="2" severity="warning" message="The file C:\Users\carla\git\bcngo-frontend\app\src\main\java\com\example\bcngo\screens\admin\CreateInterestPoint.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+	<error line="4" column="1" severity="warning" message="androidx.compose.foundation.layout.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="9" column="1" severity="warning" message="androidx.compose.material3.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="10" column="1" severity="warning" message="androidx.compose.runtime.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="64" column="14" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="226" column="28" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="247" column="9" severity="warning" message="Private property `newPoint` is unused." source="detekt.UnusedPrivateProperty" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/admin/InfoIntPointAdmin.kt">
+	<error line="39" column="5" severity="warning" message="The function InfoIntPointAdmin is too long (62). The maximum length is 60." source="detekt.LongMethod" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/CalendarItinerary.kt">
+	<error line="42" column="5" severity="warning" message="The function CalendarItinerary is too long (136). The maximum length is 60." source="detekt.LongMethod" />
+	<error line="263" column="2" severity="warning" message="The file C:\Users\carla\git\bcngo-frontend\app\src\main\java\com\example\bcngo\screens\CalendarItinerary.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+	<error line="6" column="1" severity="warning" message="androidx.compose.foundation.layout.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="10" column="1" severity="warning" message="androidx.compose.material3.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="11" column="1" severity="warning" message="androidx.compose.runtime.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="166" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/Home.kt">
+	<error line="234" column="5" severity="warning" message="The function InfoCard is too long (61). The maximum length is 60." source="detekt.LongMethod" />
+	<error line="76" column="5" severity="warning" message="The function HomeContent is too long (119). The maximum length is 60." source="detekt.LongMethod" />
+	<error line="4" column="1" severity="warning" message="androidx.compose.foundation.layout.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="10" column="1" severity="warning" message="androidx.compose.material3.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="11" column="1" severity="warning" message="androidx.compose.runtime.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="35" column="1" severity="warning" message="com.google.android.gms.location.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="38" column="1" severity="warning" message="com.google.maps.android.compose.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="86" column="50" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="116" column="70" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="117" column="45" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="142" column="44" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="142" column="53" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="220" column="40" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="246" column="69" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="294" column="47" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/login/LogIn.kt">
+	<error line="57" column="5" severity="warning" message="The function LogIn is too long (113). The maximum length is 60." source="detekt.LongMethod" />
+	<error line="218" column="18" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="211" column="18" severity="warning" message="The caught exception is swallowed. The original exception could be lost." source="detekt.SwallowedException" />
+	<error line="44" column="1" severity="warning" message="com.example.bcngo.exceptions.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="231" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="62" column="5" severity="warning" message="Function parameter `auth` is unused." source="detekt.UnusedParameter" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/OptionItinerary.kt">
+	<error line="25" column="5" severity="warning" message="The function OptionItinerary is too long (77). The maximum length is 60." source="detekt.LongMethod" />
+	<error line="102" column="2" severity="warning" message="The file C:\Users\carla\git\bcngo-frontend\app\src\main\java\com\example\bcngo\screens\OptionItinerary.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+	<error line="4" column="1" severity="warning" message="androidx.compose.foundation.layout.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="5" column="1" severity="warning" message="androidx.compose.material3.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/previewItinerary/PreviewItinerary.kt">
+	<error line="64" column="5" severity="warning" message="The function PreviewItinerary is too long (99). The maximum length is 60." source="detekt.LongMethod" />
+	<error line="189" column="5" severity="warning" message="The function ItineraryDayItem is too long (74). The maximum length is 60." source="detekt.LongMethod" />
+	<error line="153" column="34" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="175" column="30" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="280" column="14" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="153" column="34" severity="warning" message="The caught exception is swallowed. The original exception could be lost." source="detekt.SwallowedException" />
+	<error line="175" column="30" severity="warning" message="The caught exception is swallowed. The original exception could be lost." source="detekt.SwallowedException" />
+	<error line="306" column="2" severity="warning" message="The file C:\Users\carla\git\bcngo-frontend\app\src\main\java\com\example\bcngo\screens\previewItinerary\PreviewItinerary.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+	<error line="255" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="205" column="35" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="232" column="39" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="263" column="46" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="66" column="5" severity="warning" message="Function parameter `selectedPointsViewModel` is unused." source="detekt.UnusedParameter" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/searchpoints/InfoIntPoint.kt">
+	<error line="55" column="5" severity="warning" message="The function CardContent is too long (71). The maximum length is 60." source="detekt.LongMethod" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/signup/SignUp.kt">
+	<error line="54" column="5" severity="warning" message="The function SignUp is too long (135). The maximum length is 60." source="detekt.LongMethod" />
+	<error line="238" column="18" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="42" column="1" severity="warning" message="com.example.bcngo.exceptions.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="277" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="96" column="81" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="253" column="28" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="266" column="28" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="55" column="5" severity="warning" message="Function parameter `modifier` is unused." source="detekt.UnusedParameter" />
+	<error line="59" column="5" severity="warning" message="Function parameter `auth` is unused." source="detekt.UnusedParameter" />
+	<error line="61" column="9" severity="warning" message="Private property `image` is unused." source="detekt.UnusedPrivateProperty" />
+	<error line="62" column="9" severity="warning" message="Private property `image2` is unused." source="detekt.UnusedPrivateProperty" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/Welcome.kt">
+	<error line="39" column="5" severity="warning" message="The function Welcome is too long (88). The maximum length is 60." source="detekt.LongMethod" />
+	<error line="143" column="2" severity="warning" message="The file C:\Users\carla\git\bcngo-frontend\app\src\main\java\com\example\bcngo\screens\Welcome.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+	<error line="95" column="30" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="127" column="39" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/components/GoogleButton.kt">
+	<error line="62" column="26" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/network/ApiViewModel.kt">
+	<error line="24" column="22" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="49" column="22" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="5" column="1" severity="warning" message="androidx.compose.runtime.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/PruebaSerializacion.kt">
+	<error line="67" column="22" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="23" column="12" severity="warning" message="The file name &apos;PruebaSerializacion&apos; does not match the name of the single top-level declaration &apos;InterestPoint&apos;." source="detekt.MatchingDeclarationName" />
+	<error line="26" column="5" severity="warning" message="Constructor parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.ConstructorParameterNaming" />
+	<error line="27" column="5" severity="warning" message="Constructor parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.ConstructorParameterNaming" />
+	<error line="31" column="5" severity="warning" message="Constructor parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.ConstructorParameterNaming" />
+	<error line="7" column="1" severity="warning" message="androidx.compose.runtime.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="10" column="1" severity="warning" message="io.ktor.client.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="11" column="1" severity="warning" message="io.ktor.client.call.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="13" column="1" severity="warning" message="io.ktor.client.plugins.contentnegotiation.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="14" column="1" severity="warning" message="io.ktor.client.plugins.logging.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="15" column="1" severity="warning" message="io.ktor.client.request.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="16" column="1" severity="warning" message="io.ktor.client.statement.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="17" column="1" severity="warning" message="io.ktor.serialization.kotlinx.json.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/utils/AuthManager.kt">
+	<error line="45" column="18" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="57" column="18" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="95" column="18" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="94" column="18" severity="warning" message="Exception is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case." source="detekt.TooGenericExceptionThrown" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/viewmodels/PreviewItineraryViewModel.kt">
+	<error line="26" column="18" severity="warning" message="The caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="27" column="13" severity="warning" message="Do not print a stack trace. These debug statements should be removed or replaced with a logger." source="detekt.PrintStackTrace" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/model/InterestPoint.kt">
+	<error line="9" column="5" severity="warning" message="Constructor parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.ConstructorParameterNaming" />
+	<error line="10" column="5" severity="warning" message="Constructor parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.ConstructorParameterNaming" />
+	<error line="14" column="5" severity="warning" message="Constructor parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.ConstructorParameterNaming" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/model/Itinerary.kt">
+	<error line="12" column="5" severity="warning" message="Constructor parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.ConstructorParameterNaming" />
+	<error line="13" column="5" severity="warning" message="Constructor parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.ConstructorParameterNaming" />
+	<error line="14" column="5" severity="warning" message="Constructor parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.ConstructorParameterNaming" />
+	<error line="15" column="5" severity="warning" message="Constructor parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.ConstructorParameterNaming" />
+	<error line="19" column="5" severity="warning" message="Constructor parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.ConstructorParameterNaming" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/model/ShortItinerary.kt">
+	<error line="9" column="5" severity="warning" message="Constructor parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.ConstructorParameterNaming" />
+	<error line="10" column="5" severity="warning" message="Constructor parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.ConstructorParameterNaming" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/components/GreyButton.kt">
+	<error line="19" column="5" severity="warning" message="Function parameter `modifier` is unused." source="detekt.UnusedParameter" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/components/ProgressBar.kt">
+	<error line="26" column="22" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/components/RedButton.kt">
+	<error line="18" column="5" severity="warning" message="Function parameter `modifier` is unused." source="detekt.UnusedParameter" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/model/Item.kt">
+	<error line="11" column="2" severity="warning" message="The file C:\Users\carla\git\bcngo-frontend\app\src\main\java\com\example\bcngo\model\Item.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/navigation/Routes.kt">
+	<error line="21" column="2" severity="warning" message="The file C:\Users\carla\git\bcngo-frontend\app\src\main\java\com\example\bcngo\navigation\Routes.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/admin/HomeAdmin.kt">
+	<error line="3" column="1" severity="warning" message="androidx.compose.foundation.layout.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/admin/ListPointsAdmin.kt">
+	<error line="4" column="1" severity="warning" message="androidx.compose.foundation.layout.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="7" column="1" severity="warning" message="androidx.compose.material3.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/AuthomaticItinerary.kt">
+	<error line="3" column="1" severity="warning" message="androidx.compose.foundation.layout.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="6" column="1" severity="warning" message="androidx.compose.material3.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="7" column="1" severity="warning" message="androidx.compose.runtime.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="26" column="5" severity="warning" message="Function parameter `modifier` is unused." source="detekt.UnusedParameter" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/ListItineraries.kt">
+	<error line="137" column="2" severity="warning" message="The file C:\Users\carla\git\bcngo-frontend\app\src\main\java\com\example\bcngo\screens\ListItineraries.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+	<error line="3" column="1" severity="warning" message="androidx.compose.foundation.layout.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="10" column="1" severity="warning" message="androidx.compose.material3.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="11" column="1" severity="warning" message="androidx.compose.runtime.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="32" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/login/LoginScaffold.kt">
+	<error line="49" column="36" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="61" column="28" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/manualitinerary/ManualItinerary.kt">
+	<error line="6" column="1" severity="warning" message="androidx.compose.foundation.layout.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="12" column="1" severity="warning" message="androidx.compose.runtime.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="61" column="51" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="62" column="47" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/screens/searchpoints/ListIntPoints.kt">
+	<error line="147" column="2" severity="warning" message="The file C:\Users\carla\git\bcngo-frontend\app\src\main\java\com\example\bcngo\screens\searchpoints\ListIntPoints.kt is not ending with a new line." source="detekt.NewLineAtEndOfFile" />
+	<error line="93" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="94" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="95" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="96" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="97" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/viewmodels/LogInGoogleViewModel.kt">
+	<error line="25" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="C:/Users/carla/git/bcngo-frontend/app/src/main/java/com/example/bcngo/viewmodels/SignUpGoogleViewModel.kt">
+	<error line="24" column="1" severity="warning" message="Line detected, which is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+</checkstyle>
