@@ -1,0 +1,23 @@
+# Secretos y entorno local (nunca subir a GitHub)
+.env
+.env.local
+config/firebase-key.json
+*.pem
+
+__pycache__/
+*.pyc
+*.pyo
+
+venv/
+env/
+.venv/
+
+*.vscode/
+
+*.sqlite3
+
+*.log
+
+.coverage
+htmlcov/
+

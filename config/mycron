@@ -1,0 +1,2 @@
+# Ejecutar el comando de sincronización todos los días a las 6 AM
+0 6 * * * cd /app && python manage.py sync_events

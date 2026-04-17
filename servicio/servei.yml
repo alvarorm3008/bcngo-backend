@@ -1,0 +1,61 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Parks API - BCNGO
+  description: "Documentació OpenAPI per obtenir punts d'interès de la categoria 'Parques' proporcionada per l'aplicació BCNGO."
+servers:
+  - url: '35.180.108.104/puntosdeinteres/parks/'
+    description: Servidor de producció
+
+paths:
+  /parks:
+    get:
+      summary: Obtenir punts d'interès de la categoria "Parques"
+      description: Retorna una llista amb tots els punts d'interès classificats com a "Parques".
+      responses:
+        '200':
+          description: Llista de punts d'interès de categoria "Parques".
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Llista de punts d'interès de la categoria "Parques".
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                      description: Identificador únic del punt d'interès.
+                    name:
+                      type: string
+                      example: "Parc Güell"
+                      description: Nom del punt d'interès.
+                    address_name:
+                      type: string
+                      example: "Carrer d'Olot"
+                      description: Adreça del punt d'interès.
+                    latitude:
+                      type: number
+                      format: float
+                      example: 41.4145
+                      description: Latitud del punt d'interès.
+                    longitude:
+                      type: number
+                      format: float
+                      example: 2.1527
+                      description: Longitud del punt d'interès.
+                    category:
+                      type: string
+                      example: "Parques"
+                      description: Categoria del punt d'interès.
+        '500':
+          description: Error intern del servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Error al carregar els punts d'interès de categoria 'Parques'."
