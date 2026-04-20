@@ -1,74 +1,74 @@
 # BCNGo — Backend API
 
-API REST del proyecto **BCNGo**: aplicación orientada a cultura y ocio en Barcelona (eventos, puntos de interés, itinerarios, pasaporte cultural y usuarios).
+REST API for **BCNGo**, a platform focused on culture and leisure in Barcelona (events, points of interest, itineraries, cultural passport, and users).
 
-Este código vive en el monorepo bajo la carpeta **`backend/`**. Desde la raíz del repositorio, entra aquí antes de ejecutar Docker o `manage.py`.
+This code lives in the monorepo under **`backend/`**. From the repository root, enter this directory before running Docker or `manage.py`.
 
-Stack principal: **Django 4.2**, **Django REST Framework**, **PostgreSQL**, autenticación **JWT**, notificaciones con **Firebase** y documentación **OpenAPI (Swagger / ReDoc)**.
+Main stack: **Django 4.2**, **Django REST Framework**, **PostgreSQL**, **JWT** authentication, **Firebase** notifications, and **OpenAPI documentation (Swagger / ReDoc)**.
 
 ---
 
-## Contenido
+## Contents
 
-- [Requisitos](#requisitos)
-- [Puesta en marcha con Docker](#puesta-en-marcha-con-docker)
-- [Puesta en marcha en local (sin Docker)](#puesta-en-marcha-en-local-sin-docker)
-- [Variables de entorno](#variables-de-entorno)
-- [Documentación de la API](#documentación-de-la-api)
-- [Estructura del proyecto](#estructura-del-proyecto)
-- [Comandos de gestión útiles](#comandos-de-gestión-útiles)
-- [Tests y calidad](#tests-y-calidad)
+- [Requirements](#requirements)
+- [Docker Setup](#docker-setup)
+- [Local Setup (Without Docker)](#local-setup-without-docker)
+- [Environment Variables](#environment-variables)
+- [API Documentation](#api-documentation)
+- [Project Structure](#project-structure)
+- [Useful Management Commands](#useful-management-commands)
+- [Tests and Code Quality](#tests-and-code-quality)
 - [CI/CD](#cicd)
 
 ---
 
-## Requisitos
+## Requirements
 
-| Entorno | Versión recomendada |
-|--------|---------------------|
-| Python | 3.9+ (alineado con el `Dockerfile`) |
-| PostgreSQL | Compatible con `psycopg2-binary` del `requirements.txt` |
-| Docker / Docker Compose | Para el flujo containerizado descrito abajo |
+| Environment | Recommended Version |
+|-------------|---------------------|
+| Python | 3.9+ (aligned with the `Dockerfile`) |
+| PostgreSQL | Compatible with `psycopg2-binary` in `requirements.txt` |
+| Docker / Docker Compose | For the containerized workflow described below |
 
 ---
 
-## Puesta en marcha con Docker
+## Docker Setup
 
-1. Clona el monorepo y entra en la carpeta del backend:
+1. Clone the monorepo and enter the backend folder:
 
    ```bash
    cd backend
    ```
 
-2. Asegúrate de tener el fichero de credenciales de Firebase en la ruta esperada (por defecto `./config/firebase-key.json`, o la que indiques con `FIREBASE_KEY_PATH`).
+2. Ensure the Firebase credentials file exists at the expected location (default: `./config/firebase-key.json`, or the path defined in `FIREBASE_KEY_PATH`).
 
-3. Levanta los servicios:
+3. Start services:
 
    ```bash
    docker compose up --build
    ```
 
-   La aplicación queda expuesta en **http://localhost:8000** (puerto mapeado en `docker-compose.yml`).
+   The app will be available at **http://localhost:8000** (mapped port from `docker-compose.yml`).
 
-4. En otra terminal, aplica migraciones (primera vez o tras cambios en modelos):
+4. In another terminal, apply migrations (first setup or after model changes):
 
    ```bash
    docker exec bcngo-container python manage.py migrate
    ```
 
-5. Para detener (desde `backend/`):
+5. To stop services (from `backend/`):
 
    ```bash
    docker compose down
    ```
 
-> **Nota:** En la imagen se configura **cron** para ejecutar diariamente la sincronización de eventos (`sync_events`). Revisa `config/mycron` si necesitas otro horario o comandos.
+> **Note:** The Docker image configures **cron** to run daily event synchronization (`sync_events`). Check `config/mycron` if you need a different schedule or command.
 
 ---
 
-## Puesta en marcha en local (sin Docker)
+## Local Setup (Without Docker)
 
-1. Desde la raíz del monorepo, entra en `backend/` y crea y activa un entorno virtual:
+1. From monorepo root, enter `backend/`, create and activate a virtual environment:
 
    ```bash
    cd backend
@@ -77,17 +77,17 @@ Stack principal: **Django 4.2**, **Django REST Framework**, **PostgreSQL**, aute
    # .\venv\Scripts\activate  # Windows
    ```
 
-2. Instala dependencias:
+2. Install dependencies:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Configura PostgreSQL y ajusta `DATABASES` en `bcngo_backend/settings.py` (o migra la configuración a variables de entorno en tu despliegue). El usuario, contraseña y base deben coincidir con tu instancia local.
+3. Configure PostgreSQL and adjust `DATABASES` in `bcngo_backend/settings.py` (or migrate this config to environment variables for deployment). User, password, and database must match your local instance.
 
-4. Exporta las variables necesarias (ver siguiente sección), incluido el path al JSON de Firebase.
+4. Export required environment variables (next section), including the Firebase JSON path.
 
-5. Aplica migraciones y arranca el servidor de desarrollo:
+5. Apply migrations and start the development server:
 
    ```bash
    python manage.py migrate
@@ -96,84 +96,84 @@ Stack principal: **Django 4.2**, **Django REST Framework**, **PostgreSQL**, aute
 
 ---
 
-## Variables de entorno
+## Environment Variables
 
-| Variable | Descripción |
+| Variable | Description |
 |----------|-------------|
-| `FIREBASE_KEY_PATH` | Ruta al JSON de credenciales de Firebase Admin. Por defecto: `./config/firebase-key.json`. |
-| `EMAIL_HOST_USER` | Usuario SMTP (p. ej. recuperación de contraseña). |
-| `EMAIL_HOST_PASSWORD` | Contraseña o app password del buzón. |
+| `FIREBASE_KEY_PATH` | Path to Firebase Admin credentials JSON. Default: `./config/firebase-key.json`. |
+| `EMAIL_HOST_USER` | SMTP username (for features like password recovery). |
+| `EMAIL_HOST_PASSWORD` | Email password or app password. |
 
-Estas claves se leen con `python-decouple` donde aplica; puedes usar un fichero `.env` dentro de **`backend/`** (no lo subas al repositorio si contiene secretos).
+These values are read with `python-decouple` where applicable; you can use a `.env` file inside **`backend/`** (do not commit it if it contains secrets).
 
-**Buenas prácticas:** no versiones claves reales de base de datos, `SECRET_KEY` ni el JSON de Firebase. Añade `firebase-key.json` y `.env` a `.gitignore` en entornos reales si aún no están ignorados.
+**Best practice:** never commit real database credentials, `SECRET_KEY`, or Firebase JSON files. Add `firebase-key.json` and `.env` to `.gitignore` in real environments if not already ignored.
 
 ---
 
-## Documentación de la API
+## API Documentation
 
-Con el servidor en marcha:
+With the server running:
 
-| Recurso | URL |
-|--------|-----|
+| Resource | URL |
+|----------|-----|
 | **Swagger UI** | http://localhost:8000/swagger/ |
 | **ReDoc** | http://localhost:8000/redoc/ |
-| **Admin Django** | http://localhost:8000/admin/ |
+| **Django Admin** | http://localhost:8000/admin/ |
 
-Prefijos principales de la API (ver `bcngo_backend/urls.py`):
+Main API prefixes (see `bcngo_backend/urls.py`):
 
-| Prefijo | Módulo |
-|---------|--------|
-| `/puntosdeinteres/` | Puntos de interés y reseñas |
-| `/itinerario/` | Itinerarios |
-| `/users/` | Usuarios y autenticación |
-| `/pasaporte/` | Pasaporte cultural |
-| `/eventos/` | Eventos y funcionalidades asociadas |
-| `/` (vía `servicio`) | Integración con el servicio YAML externo |
-
----
-
-## Estructura del proyecto
-
-| Ruta | Rol |
-|------|-----|
-| `bcngo_backend/` | Settings, URLs raíz, plantillas (p. ej. reset de contraseña) |
-| `config/` | Cron y recursos de configuración (p. ej. Firebase) |
-| `users/` | Modelo de usuario personalizado, JWT, vistas de auth |
-| `puntosdeinteres/` | POIs, sincronización con APIs externas |
-| `itinerario/` | Itinerarios |
-| `pasaporte/` | Pasaporte cultural |
-| `eventos/` | Eventos, chats de grupo, favoritos, sincronización |
-| `servicio/` | Endpoints del servicio recibido / contrato YAML |
+| Prefix | Module |
+|--------|--------|
+| `/puntosdeinteres/` | Points of interest and reviews |
+| `/itinerario/` | Itineraries |
+| `/users/` | Users and authentication |
+| `/pasaporte/` | Cultural passport |
+| `/eventos/` | Events and related features |
+| `/` (via `servicio`) | Integration with external YAML service |
 
 ---
 
-## Comandos de gestión útiles
+## Project Structure
+
+| Path | Role |
+|------|------|
+| `bcngo_backend/` | Settings, root URLs, templates (e.g., password reset) |
+| `config/` | Cron and configuration resources (e.g., Firebase) |
+| `users/` | Custom user model, JWT, auth views |
+| `puntosdeinteres/` | POIs and external API synchronization |
+| `itinerario/` | Itineraries |
+| `pasaporte/` | Cultural passport |
+| `eventos/` | Events, group chats, favorites, synchronization |
+| `servicio/` | Service endpoints / YAML contract |
+
+---
+
+## Useful Management Commands
 
 ```bash
-# Sincronizar eventos desde la fuente externa
+# Sync events from external source
 python manage.py sync_events
 
-# Sincronizar puntos de interés
+# Sync points of interest
 python manage.py sync_points_of_interest
 
-# Mantenimiento de puntos (ver ayuda del comando)
+# Point maintenance (see command help)
 python manage.py delete_puntos
 ```
 
 ---
 
-## Tests y calidad
+## Tests and Code Quality
 
 ```bash
-# Tests Django
+# Django tests
 python manage.py test --noinput
 
-# Pytest (requiere `pytest-django`; `DJANGO_SETTINGS_MODULE` en pytest.ini)
+# Pytest (requires `pytest-django`; `DJANGO_SETTINGS_MODULE` in pytest.ini)
 pytest
 ```
 
-Análisis estático con Pylint (el CI lo ejecuta dentro del contenedor):
+Static analysis with Pylint (also executed by CI in containerized flow):
 
 ```bash
 pylint . --exit-zero
@@ -183,19 +183,19 @@ pylint . --exit-zero
 
 ## CI/CD
 
-En `.github/workflows/ci-django.yml` (en la raíz del monorepo):
+In `.github/workflows/ci-django.yml` (monorepo root):
 
-1. Solo se ejecuta cuando cambian archivos bajo **`backend/`** (o el propio workflow).
-2. Se construye y levanta el proyecto con **Docker Compose** desde `backend/`.
-3. Se espera a PostgreSQL, se ejecuta **Pylint**, **migraciones** y **`manage.py test`**.
-4. Tras un **push** a `main` / `develop`, un job de **deploy** puede actualizar la instancia remota vía SSH (secretos p. ej. `LIGHTSAIL_SSH_KEY`). En el servidor, el código debe incluir la subcarpeta `backend/` con el `docker-compose.yml`.
+1. Runs only when files under **`backend/`** (or the workflow file itself) change.
+2. Builds and starts the project using **Docker Compose** from `backend/`.
+3. Waits for PostgreSQL, then runs **Pylint**, **migrations**, and **`manage.py test`**.
+4. After a **push** to `main` / `develop`, a **deploy** job can update the remote instance via SSH (secrets such as `LIGHTSAIL_SSH_KEY`). On the server, repository layout must include the `backend/` subfolder with `docker-compose.yml`.
 
-Ajusta ramas, rutas remotas y secretos según tu organización.
+Adjust branches, remote paths, and secrets based on your organization needs.
 
 ---
 
-## Licencia y contacto
+## License and Contact
 
-Documentación OpenAPI generada con **drf-yasg**. Contacto indicado en el esquema de la API: `pesbcngo@gmail.com`.
+OpenAPI docs are generated with **drf-yasg**. Contact listed in the API schema: `pesbcngo@gmail.com`.
 
-Si mejoras el despliegue, documenta en este README los cambios en URLs públicas o requisitos nuevos para que el equipo las tenga centralizadas.
+If you improve deployment, update this README with public URLs or new requirements so the team has centralized documentation.

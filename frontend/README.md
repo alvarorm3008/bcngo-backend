@@ -1,78 +1,78 @@
 # BCN GO
 
-Parte del monorepo BCNGo: este código está en la carpeta **`frontend/`**. El archivo `app/google-services.json` no se sube al repositorio; en **GitHub Actions** configura el secreto **`GOOGLE_SERVICES_JSON`** con el JSON completo para que el CI pueda compilar.
+Part of the BCNGo monorepo: this code lives under **`frontend/`**. The file `app/google-services.json` is not committed; in **GitHub Actions**, configure the **`GOOGLE_SERVICES_JSON`** secret with the full JSON content so CI can build correctly.
 
-Aplicación Android para descubrir Barcelona: puntos de interés, itinerarios (manuales y automáticos), eventos, movilidad (paradas cercanas: metro, bus, Bicing) y comunidad mediante chats y reseñas. Incluye autenticación con correo y Google, notificaciones push y panel de administración.
-
----
-
-## Características principales
-
-- **Cuenta y seguridad**: registro, inicio de sesión, Google Sign-In, recuperación de contraseña, perfil editable y JWT almacenado de forma local.
-- **Itinerarios**: creación manual (selección de puntos) o automática (categorías y rareza), listado, edición y eliminación.
-- **Mapas y ubicación**: Google Maps en Compose, permisos de ubicación y consulta de paradas cercanas al usuario.
-- **Eventos**: calendario, favoritos y detalle; integración con chats de evento.
-- **Chats**: conversaciones por evento, mensajes, notificaciones FCM al unirse a un chat.
-- **Puntos de interés y reseñas**: exploración, valoraciones, moderación (reporte) y flujos de administración.
-- **Pasaporte / gamificación**: consulta y marcado de puntos visitados.
-- **Administración**: gestión de usuarios (roles, bloqueo), revisión de contenido reportado (reseñas y mensajes), según permisos del backend.
+Android app to discover Barcelona: points of interest, itineraries (manual and automatic), events, mobility (nearby metro, bus, and Bicing stops), and community features through chats and reviews. Includes email/Google authentication, push notifications, and an admin panel.
 
 ---
 
-## Stack tecnológico
+## Main Features
 
-| Área | Tecnología |
+- **Account and security:** sign up, sign in, Google Sign-In, password recovery, editable profile, and locally stored JWT.
+- **Itineraries:** manual creation (point selection) or automatic generation (categories and rarity), plus listing, editing, and deletion.
+- **Maps and location:** Google Maps with Compose, location permissions, and nearby stop lookup.
+- **Events:** calendar, favorites, details, and integration with event chats.
+- **Chats:** event-based conversations, messages, and FCM notifications when joining chats.
+- **Points of interest and reviews:** browsing, ratings, moderation/reporting, and admin workflows.
+- **Passport / gamification:** check and mark visited points.
+- **Administration:** user management (roles, blocking), review of reported content (reviews and messages), based on backend permissions.
+
+---
+
+## Tech Stack
+
+| Area | Technology |
 |------|------------|
-| Lenguaje | Kotlin |
+| Language | Kotlin |
 | UI | Jetpack Compose, Material 3 |
-| Navegación | Navigation Compose |
-| Red | Ktor Client, OkHttp, kotlinx.serialization |
+| Navigation | Navigation Compose |
+| Networking | Ktor Client, OkHttp, kotlinx.serialization |
 | Async | Kotlin Coroutines |
-| Mapas y ubicación | Maps Compose, Play Services (Maps, Location) |
-| Autenticación / analítica | Firebase (Auth, Analytics, Cloud Messaging) |
-| Calidad | ktlint, Detekt |
+| Maps and location | Maps Compose, Play Services (Maps, Location) |
+| Auth / analytics | Firebase (Auth, Analytics, Cloud Messaging) |
+| Quality | ktlint, Detekt |
 | Build | Gradle (Kotlin DSL), AGP 8.x |
 
-- **minSdk**: 28 · **targetSdk / compileSdk**: 34  
-- **JDK de compilación**: 21 (ver `compileOptions` / `kotlinOptions` en el módulo `app`)
+- **minSdk:** 28 · **targetSdk / compileSdk:** 34  
+- **Build JDK:** 21 (see `compileOptions` / `kotlinOptions` in the `app` module)
 
 ---
 
-## Requisitos previos
+## Prerequisites
 
-- [Android Studio](https://developer.android.com/studio) reciente (recomendado: Hedgehog o superior) con Android SDK 34.
-- **JDK 21** instalado y configurado para el proyecto.
-- Cuenta de **Firebase** con `google-services.json` válido para el paquete `com.example.bcngo`.
-- **Clave de API de Google Maps** para Android (restricciones recomendadas por firma y paquete). El proyecto usa el plugin *Secrets Gradle*; en producción conviene no commitear claves en el manifiesto y cargarlas de forma segura.
+- A recent [Android Studio](https://developer.android.com/studio) version (recommended: Hedgehog or newer) with Android SDK 34.
+- **JDK 21** installed and configured for the project.
+- A **Firebase** project with a valid `google-services.json` for package `com.example.bcngo`.
+- A **Google Maps API key** for Android (package/signature restrictions recommended). The project uses the *Secrets Gradle* plugin; for production, avoid committing keys in the manifest and load them securely.
 
 ---
 
-## Puesta en marcha
+## Getting Started
 
-1. **Clonar el repositorio**
+1. **Clone the repository**
 
    ```bash
-   git clone <url-del-repositorio>
+   git clone <repository-url>
    cd bcngo-frontend-main
    ```
 
 2. **`local.properties`**  
-   Android Studio suele generarlo automáticamente. Debe incluir la ruta del SDK, por ejemplo:
+   Android Studio usually generates it automatically. It should include your SDK path, for example:
 
    ```properties
-   sdk.dir=/ruta/a/Android/sdk
+   sdk.dir=/path/to/Android/sdk
    ```
 
 3. **Firebase**  
-   Coloca el archivo `google-services.json` en el directorio `app/` (el mismo nivel que `build.gradle.kts` del módulo app), descargado desde la consola de Firebase para tu proyecto.
+   Place `google-services.json` inside `app/` (same level as the module `build.gradle.kts`), downloaded from the Firebase console for your project.
 
 4. **Backend**  
-   La URL base del API está centralizada en `ApiService` (`BASE_URL`). Ajusta ese valor para apuntar a tu entorno (desarrollo, staging o producción).
+   The API base URL is centralized in `ApiService` (`BASE_URL`). Update that value to point to your environment (development, staging, or production).
 
-5. **Sincronizar y ejecutar**  
-   Abre el proyecto en Android Studio, sincroniza Gradle y ejecuta la configuración **app** en un emulador o dispositivo físico.
+5. **Sync and run**  
+   Open the project in Android Studio, sync Gradle, and run the **app** configuration on an emulator or physical device.
 
-### Línea de comandos
+### Command Line
 
 ```bash
 chmod +x ./gradlew
@@ -80,7 +80,7 @@ chmod +x ./gradlew
 ./gradlew testDebugUnitTest
 ```
 
-Para comprobaciones de estilo (pueden configurarse en CI con `continue-on-error` según tu política):
+Style checks (you can configure CI behavior with `continue-on-error` depending on your policy):
 
 ```bash
 ./gradlew ktlintCheck
@@ -91,45 +91,45 @@ Para comprobaciones de estilo (pueden configurarse en CI con `continue-on-error`
 
 ## CI/CD (GitHub Actions)
 
-El workflow en `.github/workflows/ci.yml` (ramas `main` y `develop`) suele incluir:
+The workflow in `.github/workflows/ci.yml` (branches `main` and `develop`) usually includes:
 
-- Compilación debug (`assembleDebug`).
-- ktlint y Detekt.
-- Tests unitarios.
-- Tests instrumentados en dispositivo (`connectedDebugAndroidTest`; en GitHub suele requerir emulador o dispositivo en la nube).
+- Debug build (`assembleDebug`)
+- ktlint and Detekt
+- Unit tests
+- Instrumentation tests on device (`connectedDebugAndroidTest`; on GitHub this usually requires emulator/cloud device setup)
 
-La **distribución en Firebase App Distribution** y la autenticación con Google Cloud dependen de secretos del repositorio (`GOOGLE_CREDENTIALS_JSON`, `FIREBASE_APP_ID`, etc.). Sin esos secretos, el job puede fallar en los pasos posteriores a la compilación; puedes limitar el workflow a build y tests en forks o entornos personales.
+**Firebase App Distribution** and Google Cloud authentication depend on repository secrets (`GOOGLE_CREDENTIALS_JSON`, `FIREBASE_APP_ID`, etc.). Without those secrets, steps after build may fail; in forks/personal environments, you can restrict the workflow to build and tests.
 
 ---
 
-## Estructura del código (resumen)
+## Code Structure (Summary)
 
-```
+```text
 app/src/main/java/com/example/bcngo/
-├── MainActivity.kt          # Entrada Compose + tema
-├── navigation/              # Rutas y grafo de navegación
-├── network/                 # ApiService, cliente HTTP
-├── model/                   # DTOs y serialización
-├── screens/                 # Pantallas por flujo (login, itinerarios, chats, admin…)
-├── components/              # UI reutilizable
-├── ui/theme/                # Colores, tipografía, tema
-└── utils/                   # Servicios auxiliares (p. ej. FCM)
+├── MainActivity.kt          # Compose entry point + theme
+├── navigation/              # Routes and navigation graph
+├── network/                 # ApiService, HTTP client
+├── model/                   # DTOs and serialization
+├── screens/                 # Screens by flow (login, itineraries, chats, admin...)
+├── components/              # Reusable UI
+├── ui/theme/                # Colors, typography, theme
+└── utils/                   # Helper services (e.g., FCM)
 ```
 
 ---
 
-## Seguridad y buenas prácticas
+## Security and Best Practices
 
-- No subas a un repositorio público claves de Maps, OAuth ni tokens de Firebase sin restricciones.
-- Revisa `network_security_config` y el uso de HTTP claro vs HTTPS según tu backend.
-- Rota las claves si alguna ha sido expuesta en el historial del repo.
-
----
-
-## Licencia
-
-Especifica aquí la licencia del proyecto (por ejemplo MIT, Apache 2.0 o la que corresponda a tu organización).
+- Do not upload unrestricted Maps keys, OAuth secrets, or Firebase tokens to public repositories.
+- Review `network_security_config` and clear HTTP vs HTTPS usage based on your backend setup.
+- Rotate keys immediately if any secret has been exposed in repository history.
 
 ---
 
-*BCN GO — frontend Android. Requiere un backend compatible con los endpoints consumidos en `ApiService`.*
+## License
+
+Specify the project license here (for example MIT, Apache 2.0, or your organization's license).
+
+---
+
+*BCN GO — Android frontend. Requires a backend compatible with the endpoints consumed in `ApiService`.*

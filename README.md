@@ -1,27 +1,27 @@
 # BCNGo
 
-Monorepo del proyecto **BCNGo**: cultura y ocio en Barcelona. Incluye la **API REST (Django)** y la **app Android (Kotlin)** en un solo repositorio.
+Monorepo for **BCNGo**, a culture and leisure project focused on Barcelona. It includes both the **REST API (Django)** and the **Android app (Kotlin)** in one repository.
 
-| Parte | Ruta | Descripción |
-|--------|------|-------------|
+| Part | Path | Description |
+|------|------|-------------|
 | **Backend** | [`backend/`](backend/) | Django, DRF, PostgreSQL, JWT, Firebase Admin, Swagger |
-| **Frontend** | [`frontend/`](frontend/) | App Android con Gradle |
+| **Frontend** | [`frontend/`](frontend/) | Android app with Gradle |
 
-## Requisitos rápidos
+## Quick Requirements
 
-- **Backend:** Python 3.9+, Docker (opcional), PostgreSQL.
-- **Frontend:** Android Studio / JDK (ver [`frontend/README.md`](frontend/README.md)).
+- **Backend:** Python 3.9+, Docker (optional), PostgreSQL.
+- **Frontend:** Android Studio / JDK (see [`frontend/README.md`](frontend/README.md)).
 
-## Puesta en marcha
+## Getting Started
 
-### API (desde la raíz del repo)
+### API (from repository root)
 
 ```bash
 cd backend
 docker compose up --build
 ```
 
-Migraciones (primera vez):
+Migrations (first setup):
 
 ```bash
 docker exec bcngo-container python manage.py migrate
@@ -29,47 +29,47 @@ docker exec bcngo-container python manage.py migrate
 
 Swagger: http://localhost:8000/swagger/
 
-Más detalle: [**backend/README.md**](backend/README.md).
+More details: [**backend/README.md**](backend/README.md).
 
-### App Android
+### Android App
 
 ```bash
 cd frontend
 ./gradlew assembleDebug
 ```
 
-El archivo `frontend/app/google-services.json` no se versiona (contiene claves). Cópialo en local según [**frontend/README.md**](frontend/README.md). En GitHub Actions, define el secreto **`GOOGLE_SERVICES_JSON`** con el contenido completo del JSON para que el CI pueda compilar.
+The file `frontend/app/google-services.json` is not versioned (it contains credentials). Copy it locally as described in [**frontend/README.md**](frontend/README.md). In GitHub Actions, define the **`GOOGLE_SERVICES_JSON`** secret with the full JSON content so CI can build the app.
 
 ## CI/CD
 
-Los workflows viven en [`.github/workflows/`](.github/workflows/):
+Workflows are located in [`.github/workflows/`](.github/workflows/):
 
-- **`ci-django.yml`** — Docker Compose, Pylint, migraciones y tests del backend (solo si cambian archivos bajo `backend/` o el propio workflow).
-- **`ci-android.yml`** — Compilación, ktlint, detekt, tests y despliegue a Firebase Distribution cuando aplica (solo si cambian archivos bajo `frontend/` o el propio workflow).
+- **`ci-django.yml`** — Docker Compose, Pylint, migrations, and backend tests (only when files under `backend/` or the workflow itself change).
+- **`ci-android.yml`** — Build, ktlint, detekt, tests, and Firebase Distribution deployment when applicable (only when files under `frontend/` or the workflow itself change).
 
-## Despliegue del backend en servidor
+## Backend Deployment on Server
 
-Si despliegas con el job SSH del workflow Django, en la máquina remota el código debe quedar con esta estructura (por ejemplo tras `git pull`):
+If you deploy using the Django workflow SSH job, the remote machine should keep this structure (for example after `git pull`):
 
 ```text
-.../bcngo-backend/    # o el nombre de tu carpeta
+.../bcngo-backend/    # or your folder name
   backend/
     docker-compose.yml
     ...
 ```
 
-Los comandos remotos usan el subdirectorio **`backend/`** para `docker compose`. Si tu servidor tenía el proyecto en la raíz del repo antiguo, mueve o reclona para alinear rutas.
+Remote commands use the **`backend/`** subdirectory for `docker compose`. If your server had the old repo layout with files at root level, move or re-clone the project to align paths.
 
-## Estructura del repositorio
+## Repository Structure
 
 ```text
 .
-├── README.md                 # Este archivo
-├── backend/                  # Proyecto Django (API)
-├── frontend/                 # Proyecto Android
-└── .github/workflows/        # CI backend y frontend
+├── README.md                 # This file
+├── backend/                  # Django project (API)
+├── frontend/                 # Android project
+└── .github/workflows/        # Backend and frontend CI
 ```
 
 ---
 
-Contacto API (documentación OpenAPI): `pesbcngo@gmail.com`.
+API contact (OpenAPI documentation): `pesbcngo@gmail.com`.
